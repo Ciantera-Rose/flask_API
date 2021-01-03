@@ -23,7 +23,8 @@ class DataSchema(ma.Schema):
     class Meta: 
         fields = ('title', 'content')
 
-data_schema = DataSchema(many=True)
+data_schema = DataSchema()
+datas_schema = DataSchema(many=True)
 
 # Endpoint to create a new data
 @app.route('/data', methods=["POST"])
@@ -40,6 +41,12 @@ def add_data():
 
     return data_schema.jsonify(data)
 
+# Endpoint to query all data
+@app.route("/datas", methods=["GET"])
+def get_datas():
+    all_datas = Data.query.all()
+    result = datas_schema.dump(all_datas)
+    return jsonify(result)
 
 
 

@@ -96,7 +96,8 @@ FLASK API SET-UP Instructions
         class Meta: 
             fields = ('title', 'content')
             
-    data_schema = DataSchema(many=True)
+    data_schema = DataSchema()
+    datas_schema = DataSchema(many=True)
 
     if __name__ == "__main__":
     app.run(debug=True)
@@ -127,3 +128,4 @@ FLASK API SET-UP Instructions
 - Update import:
     from flask import Flask, request, jsonify
 
+-Refer to app.py for #Endpoints
