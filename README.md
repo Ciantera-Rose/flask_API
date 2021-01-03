@@ -83,14 +83,31 @@ FLASK API SET-UP Instructions
     *So now we have a SQLlite database and have instantiated a db and ma object.
 
 -Next: Create Schema for table:
-    Class Guide(db.Model): (inherits from object db.(model method from that library))   
+    Class Data(db.Model): 
         id = db.Column(db.Integer, primary_key=True)  
-            (Built in column set automtically, primary unique id that increments as new data is added)
         title = db.Column(db.String(100), unique=False)
         content = db.Column(db.String(144), unique=False)
 
--Constructor for when a guide is called
-    class Guide(db.Model):
-    def __init__(self, title, content):
-        self.title = title
-        self.content = content 
+        def __init__(self, title, content):
+            self.title = title
+            self.content = content 
+
+    class DataSchema(ma.Schema):
+        class Meta: 
+            fields = ('title', 'content')
+            
+    data_schema = DataSchema(many=True)
+
+    if __name__ == "__main__":
+    app.run(debug=True)
+
+    -Open Repl (Python3)
+    -Make sure Pipenv is running
+        from app import db
+        db.create_all()
+    -app.sqlite has been created.    
+    
+
+
+
+
