@@ -49,6 +49,20 @@ def get_datas():
     return jsonify(result)
 
 
+# Endpoint for updating data
+@app.route("/data/<id>", methods=["PUT"])
+def data_update(id):
+    data = Data.query.get(id)
+    title = request.json["title"]
+    content = request.json["content"]
+
+    data.title = title
+    data.content = content
+
+    db.session.commit()
+    return data_schema.jsonify(data)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
