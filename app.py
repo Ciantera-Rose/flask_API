@@ -62,6 +62,14 @@ def data_update(id):
     db.session.commit()
     return data_schema.jsonify(data)
 
+#Endpoint for deleting a record
+@app.route("/data/<id>", methods=["DELETE"])
+def data_delete(id):
+    data = Data.query.get(id)
+    db.session.delete(data)
+    db.session.commit()
+
+    return data_schema.jsonify(data)
 
 
 if __name__ == "__main__":
