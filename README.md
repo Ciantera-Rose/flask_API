@@ -106,8 +106,24 @@ FLASK API SET-UP Instructions
         from app import db
         db.create_all()
     -app.sqlite has been created.    
-    
 
 
+-Add Endpoint to create a new guide:
 
+    @app.route('/data', methods=["POST"])
+    def add_data():
+        title = request.json['title']
+        content = request.json['title']
+
+        new_data = Data(title, content)
+
+        db.session.add(new_data)
+        db.session.commit()
+
+        data = Data.query.get(new_data.id)
+
+        return data_schema.jsonify(data)
+
+- Update import:
+    from flask import Flask, request, jsonify
 
